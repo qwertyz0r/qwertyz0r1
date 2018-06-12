@@ -1,0 +1,79 @@
+#include "caesar.h" 
+#include <iostream> 
+#include <stdexcept> 
+#include <string> 
+using namespace std; 
+int main() 
+{ 
+setlocale (LC_ALL, "Russian"); 
+string k, input; 
+unsigned int key; 
+int i = 0, l = 0, max = 26; 
+char answer = '1'; 
+cout «"Введите ключ" « endl; 
+cin » key; 
+try 
+{ 
+if ((key > max) | (key <= 0)) 
+throw 1; 
+while (answer != '0') 
+{ 
+cout « "Введите текст" « endl; 
+cin.ignore(); 
+getline(cin, k); 
+cout « "Зашифровать или расшифровать текст" « endl; 
+cout « "Зашифровать - 1. Расшифровать - 2. Выйти - 0" « endl; 
+cin » answer; 
+if (answer == '1') 
+{ 
+Encode x(key); 
+input = x.Encrypt(k); 
+} 
+else if (answer == '2') 
+{ 
+Encode x(key); 
+input = x.Decrypt(k); 
+} 
+else if (answer == '0') 
+{ 
+} 
+else 
+throw 5; 
+if (answer != '0') 
+cout « input « endl; 
+} 
+} 
+catch (int error) 
+{ 
+if (error == 1) 
+{ 
+cerr « "Ключ был введен неправильно" « endl; 
+return 1; 
+} 
+else 
+if (error == 2) 
+{ 
+cerr « "Неправильно введен текст, нельзя вводить числа" « endl; 
+return 2; 
+} 
+
+else 
+
+if (error == 3) 
+{ 
+cerr « "Неправильно введен текст, нельзя вводить английские символы" « endl; 
+return 3; 
+} 
+else 
+if (error == 4) 
+{ 
+cerr « "Неправильно введен текст" « endl; 
+return 4; 
+} 
+{ 
+cerr « "Неправильный ответ на вопрос." « endl; 
+return 5; 
+} 
+} 
+return 0; 
+}
